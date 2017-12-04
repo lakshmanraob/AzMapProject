@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--<dimen name="design_navigation_icon_size" tools:override="true">64dp</dimen>
+    <dimen name="design_bottom_navigation__text_size" tools:override="true">15sp</dimen>
+    <dimen tools:override="true" name="design_navigation_icon_padding">25zdp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">65dp</dimen>-->
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="default_content_padding">15dp</dimen>
+    <dimen name="top_margin">30dp</dimen>
+    <dimen name="left_margin">20dp</dimen>
+    <dimen name="right_margin">20dp</dimen>
+    <dimen name="txt_size">18sp</dimen>
+
+    <!-- toolbar dimensions -->
+
+    <dimen name="toolbar_padding">5dp</dimen>
+    <dimen name="toolbar_height">60dp</dimen>
+    <dimen name="toolbar_btn_height">20dp</dimen>
+    <dimen name="toolbar_btn_width">20dp</dimen>
+    <dimen name="toolbar_heading_txt_size">22sp</dimen>
+    <dimen name="btn_padding">15dp</dimen>
+
+
+    <!-- overlay inmap dimensions -->
+    <dimen name="top_margin_overlay">10dp</dimen>
+    <dimen name="marign_left">5dp</dimen>
+
+
+    <!-- button dimensions -->
+    <dimen name="btn_width">120dp</dimen>
+    <dimen name="btn_height">70dp</dimen>
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!-- dimensions of text entered -->
+    <dimen name="user_name_messages">35dp</dimen>
+
+    <!-- single line view dimensions -->
+    <dimen name="view_height">1dp</dimen>
+    <dimen name="margin_bottom_view">15dp</dimen>
+
+    <!-- card dimensions -->
+    <dimen name="margin_right">10dp</dimen>
+    <dimen name="layout_card_padding">9dp</dimen>
+    <dimen name="layout_margin_bottom">10dp</dimen>
+    <dimen name="message_name_textsize">19sp</dimen>
+    <dimen name="message_title_textsize">12sp</dimen>
+    <dimen name="message_desc_textsize">14sp</dimen>
+
+    <!-- Textinputlayout dimensions -->
+    <dimen name="margin_top">20dp</dimen>
+    <dimen name="margin_from_top">70dp</dimen>
+    <dimen name="expand_lyt_height">55dp</dimen>
+    <dimen name="continue_btn_height">60dp</dimen>
+    <dimen name="margin_bottom">24dp</dimen>
+
+    <!-- more fragment dimensions -->
+    <dimen name="item_padding">20dp</dimen>
+    <dimen name="margin_left_fr">20dp</dimen>
+    <dimen name="margin_right_fr">20dp</dimen>
+
+    <!-- reusable button dimensions -->
+    <dimen name="reusable_btn_height">70dp</dimen>
+
+    <!-- standard text sizes -->
+    <dimen name="title_size">22dp</dimen>
+    <dimen name="label_size">16dp</dimen>
+
+</resources>

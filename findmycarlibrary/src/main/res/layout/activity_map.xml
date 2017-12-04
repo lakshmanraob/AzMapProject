@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:id="@+id/linearlayout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginRight="@dimen/right_margin"
+        android:background="@drawable/button_bg_round"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/place_autocomplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="40dp"
+        android:background="@color/colorWhite"
+        android:layout_marginLeft="@dimen/left_margin"
+        android:layout_marginRight="@dimen/right_margin">
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="@dimen/top_margin_overlay"
+         android:paddingLeft="@dimen/item_padding"
+         android:textSize="@dimen/txt_size"
+         android:textStyle="bold"
+         android:id="@+id/your_car_txt"
+         android:text="@string/your_car_is"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/location_txt"
+            android:layout_marginTop="@dimen/top_margin_overlay"
+            android:textSize="@dimen/txt_size"
+            android:paddingLeft="@dimen/item_padding"
+            android:textStyle="bold"
+            android:layout_below="@+id/your_car_txt"
+            android:text="Deloitte"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_right"
+            android:text="save"
+            android:background="@color/light_blue"
+            android:layout_alignParentRight="true"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/see_details_btn"
+            android:layout_below="@id/location_txt"
+            android:layout_marginLeft="@dimen/marign_left"
+            android:background="@android:color/transparent"
+            android:text="Details "/>
+    </RelativeLayout>
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+
+</FrameLayout>
