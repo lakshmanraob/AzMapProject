@@ -1,1 +1,1 @@
-include ':app', ':findmycarlibrary', ':carvaluedetaillibrary', ':reusablecomponentslibrary'
+include ':app', ':findmycarlibrary'

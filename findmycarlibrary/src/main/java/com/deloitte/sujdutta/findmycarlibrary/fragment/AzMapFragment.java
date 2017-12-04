@@ -1,4 +1,8 @@
-package com.deloitte.sujdutta.findmycarlibrary.activity;
+package com.deloitte.sujdutta.findmycarlibrary.fragment;
+
+/**
+ * Created by sujdutta on 12/4/17.
+ */
 
 import android.Manifest;
 import android.app.Dialog;
@@ -7,11 +11,16 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +43,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-/**
- * Created by sujdutta on 12/1/17.
- */
-
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+public class AzMapFragment extends Fragment implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -48,27 +53,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-    private Button archiveBtn,infoBtn,backBtn,detailsBtn;
+    private Button searchBtn,detailsBtn;
     private TextView heading;
     PlaceAutocompleteFragment placeAutoComplete;
+    Boolean isSearchEnabled;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fr_az_map);
-
-        archiveBtn = (Button) findViewById(R.id.toolbar).findViewById(R.id.archive_btn);
-        backBtn = (Button) findViewById(R.id.toolbar).findViewById(R.id.img_back);
-        infoBtn = (Button) findViewById(R.id.toolbar).findViewById(R.id.info_btn);
-        heading = (TextView) findViewById(R.id.toolbar).findViewById(R.id.page_heading);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        final View view = inflater.inflate(R.layout.fr_az_map, container, false);
+       /* archiveBtn = (Button) view.findViewById(R.id.toolbar).findViewById(R.id.archive_btn);
+        backBtn = (Button) view.findViewById(R.id.toolbar).findViewById(R.id.img_back);
+        infoBtn = (Button) view.findViewById(R.id.toolbar).findViewById(R.id.info_btn);
+        heading = (TextView) view.findViewById(R.id.toolbar).findViewById(R.id.page_heading);
         archiveBtn.setVisibility(View.INVISIBLE);
         heading.setText(getResources().getString(R.string.find_my_car));
-        backBtn.setVisibility(View.VISIBLE);
-        detailsBtn = (Button) findViewById(R.id.see_details_btn);
+        backBtn.setVisibility(View.VISIBLE);*/
+
+        detailsBtn = (Button) view.findViewById(R.id.see_details_btn);
+        searchBtn = (Button) view.findViewById(R.id.search_btn);
         detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               final Dialog dialog = new Dialog(MapsActivity.this);
+                final Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.car_parking_details);
                 dialog.setTitle("Hello");
                 // TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
@@ -77,11 +90,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+       /* searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout lyt = (LinearLayout) view.findViewById(R.id.linearlayout01);
+                if (!isSearchEnabled) {
+                    lyt.setVisibility(View.VISIBLE);
+                } else {
+                    lyt.setVisibility(View.INVISIBLE);
+                }
+            }
+        });*/
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
 
-        placeAutoComplete = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete);
+        placeAutoComplete = (PlaceAutocompleteFragment) getActivity().getFragmentManager().findFragmentById(R.id.place_autocomplete);
         placeAutoComplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -113,19 +138,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
-
-    public void openDialog(View view) {
-        Dialog dialog = new Dialog(MapsActivity.this);
-        dialog.setContentView(R.layout.car_parking_details);
-        dialog.setTitle("Hello");
-       // TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
-       // textViewUser.setText("Hi");
-        dialog.show();
+        ImageView locationButton = (ImageView) mapFragment.getView().findViewById(2);
+        locationButton.setImageResource(R.drawable.icon_my_location);
+        locationButton.setBackground(getResources().getDrawable(R.drawable.button_bg_round));
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+        // position on right bottom
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+        rlp.setMargins(0, 210, 50, 0);
+        return view;
     }
 
 
@@ -145,7 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
+            if (ContextCompat.checkSelfPermission(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
@@ -167,7 +193,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -182,7 +208,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        if (ContextCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
@@ -229,12 +255,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this,
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Asking user if explanation is needed
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -242,14 +268,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // sees the explanation, try again to request the permission.
 
                 //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
@@ -270,7 +296,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     // permission was granted. Do the
                     // contacts-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(this,
+                    if (ContextCompat.checkSelfPermission(getActivity(),
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
@@ -285,7 +311,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } else {
 
                     // Permission denied, Disable the functionality that depends on this permission.
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "permission denied", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

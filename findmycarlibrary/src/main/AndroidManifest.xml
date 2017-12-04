@@ -15,20 +15,4 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.deloitte.sujdutta.findmycarlibrary.permission.MAPS_RECEIVE" />
-
-    <application
-        android:allowBackup="true"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".activity.MapsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-    </application>
-
 </manifest>

@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">ReusableComponentsLibrary</string>
-    <string name="find_my_car">Find My Car</string>
-    <string name="your_car_is">Your Car is near</string>
-    <string name="parked_location">Deloitte</string>
-    <string name="details_btn_txt">Details</string>
-    <string name="set_timer_txt">Set parking timer</string>
-</resources>

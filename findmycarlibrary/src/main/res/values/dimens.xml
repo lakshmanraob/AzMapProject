@@ -16,8 +16,8 @@
 
     <dimen name="toolbar_padding">5dp</dimen>
     <dimen name="toolbar_height">60dp</dimen>
-    <dimen name="toolbar_btn_height">20dp</dimen>
-    <dimen name="toolbar_btn_width">20dp</dimen>
+    <dimen name="toolbar_btn_height">15dp</dimen>
+    <dimen name="toolbar_btn_width">15dp</dimen>
     <dimen name="toolbar_heading_txt_size">22sp</dimen>
     <dimen name="btn_padding">15dp</dimen>
 
@@ -27,7 +27,7 @@
     <dimen name="marign_left">5dp</dimen>
 
 
-    <!-- button dimensions -->
+    <!-- save button dimensions -->
     <dimen name="btn_width">120dp</dimen>
     <dimen name="btn_height">70dp</dimen>
 
@@ -68,5 +68,11 @@
     <!-- standard text sizes -->
     <dimen name="title_size">22dp</dimen>
     <dimen name="label_size">16dp</dimen>
+
+    <!-- map components dimension -->
+    <dimen name="search_btn_top_margin">50dp</dimen>
+    <dimen name="search_btn_margin_right">10dp</dimen>
+    <dimen name="search_btn_width">20dp</dimen>
+    <dimen name="search_btn_height">20dp</dimen>
 
 </resources>
